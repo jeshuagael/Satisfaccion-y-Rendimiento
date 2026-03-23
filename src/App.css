@@ -1,0 +1,57 @@
+body { /* Body es para que todo el fondo de la pagina se vea de una manera en este caso la puse blanca */
+  margin: 0;
+  padding: 0;
+}
+.pantalla-login {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+.lado-izq {
+  background-color: #6C1D45; /* Hice el fondo guinda del lado derecho wey, si lo quieres de otro color, dale en el cuadrado pa q te salga el menu de colores rgb y la mmd*/
+  width: 30%; /* esta madre es el ancho we puedes moverle si la quieres mas obesa o mas flaca*/
+  height: 100vh; /*este es el largo lo mismo wey por si la quieres mas alta o flaca*/
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  color: white;
+  gap:30px;
+}
+.lado-der {
+  background-color: white;
+  width: 70%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: black;
+  gap: 30px;
+  padding-top: 20px;
+}
+.lado-der h1 {
+  font-size: 2em;
+  text-align: center;
+}
+.input {
+  background-color: white; /* Esto es para que el fondo del input sea transparente */
+  color: black; /* Esto es para que el texto del input sea negro */
+  border: none; /* Esto quita el borde por defecto */
+  padding: 10px; /* Esto es para darle espacio al texto dentro del input */
+  border-radius: 5px; /* le redondee los bordes, si se los quieres quitar dale none o 0px w*/
+  width: 80%; /*Evita que las orillas choquen */
+  margin-bottom: 10px;
+}
+.VersionTag {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px, 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  z-index: 1000;
+  pointer-events: none;
+}
