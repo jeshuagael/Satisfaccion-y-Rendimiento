@@ -1,6 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap");
 body { /* Body es para que todo el fondo de la pagina se vea de una manera en este caso la puse blanca */
   margin: 0;
   padding: 0;
+  font-family: 'DM Sans', sans-serif;
+  background-color: #f8f9fa;
+  background-image: linear-gradient(#e5e7eb 1px, transparent 1px),
+  linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 .pantalla-login {
   display: flex;
@@ -8,40 +14,190 @@ body { /* Body es para que todo el fondo de la pagina se vea de una manera en es
   width: 100vw;
 }
 .lado-izq {
-  background-color: #6C1D45; /* Hice el fondo guinda del lado derecho wey, si lo quieres de otro color, dale en el cuadrado pa q te salga el menu de colores rgb y la mmd*/
-  width: 30%; /* esta madre es el ancho we puedes moverle si la quieres mas obesa o mas flaca*/
-  height: 100vh; /*este es el largo lo mismo wey por si la quieres mas alta o flaca*/
+  background-color: transparent; /* Hice el fondo guinda del lado derecho wey, si lo quieres de otro color, dale en el cuadrado pa q te salga el menu de colores rgb y la mmd*/
+  width: 400px;
+  margin: -20px auto auto auto; /* esta madre es el ancho we puedes moverle si la quieres mas obesa o mas flaca*/
+  padding: 40px; /*este es el largo lo mismo wey por si la quieres mas alta o flaca*/
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
+  color: #333;
+}
+.titulo-serif {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin: 10px 0;
+  color: #1a1a1a;
+}
+.linea-dorada {
+  width: 50px;
+  height: 4px;
+  background-color: #b38e5d;
+  margin-bottom: 20px;
+}
+.input-group {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+    margin-bottom: 15px;
+    margin-bottom: 15px;
+   border: 1px solid #ddd;
+    border-radius: 12px;
+   background: white;
+   transition: border-color 0.3s ease;
+   font-family: 'DM Sans', sans-serif;
+   font-size: 1rem;
+   color: #333;
+}
+.input-group:focus-within {
+  border-color: #6C1D45;
+  box-shadow: 0 0 0 1px #6C1D45;
+}
+.input-group input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  color: #333;
+}
+.input-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #555;
+  min-width: 80px;
+}
+.input:focus {
+  border-color: #6C1D45;
+  outline: none;
+}
+.botones-roles {
+  display: flex;
+  gap: 10px;
+  margin-bottom:25px;
+}
+.role-btn {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #801a1a;
+  border-radius: 10px;
+  background: white;
+  color: #6C1D45;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.botones-roles .role-btn.active {
+  border-color: #6C1D45;
+  background-color: #6C1D45;
   color: white;
-  gap:30px;
+  font-weight: bold;
+  box-shadow: 0 4px 120px rgba(108, 29, 69, 0.2);
+  transform: translateY(-1px);
+}
+.role-btn.active {
+  color: white;
+}
+.btn-principal {
+  background-color: #6C1D45;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(71, 23, 47, 0.3);
+  transition: transform 0.2;
+}
+.btn-principal:hover {
+  transform: translateY(-2px);
+  background-color: #5a183a;
+}
+.olvido-pass {
+  text-align: right;
+  font-size: 0.85rem;
+  color: #b38e5d;
+  text-decoration: none;
+  margin-bottom: 20px;
 }
 .lado-der {
-  background-color: white;
+  background: radial-gradient(circle at top right, #801a1a, #4a1030);
   width: 70%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  padding: 80px;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+.menu-icon {
+  position: absolute;
+  top: 40px;
+  left: 450px;
+  background-color: #b38e5d;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(179, 142, 93, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.menu-icon span {
+  width: 25px;
+  height: 3px;
+  background-color: #4a1030;
+  border-radius: 2px;
+}
+.titulo-serif-grande {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.descripcion {
+  font-size: 1.2rem;
+  max-width: 400px;
+  opacity: 0.8;
+  line-height: 1.6;
+}
+.glass-card {
+  position: absolute;
+  bottom: 80px;
+  left: 80px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 30px;
+  border-radius: 20px;
+  display: flex;
   align-items: center;
-  color: black;
-  gap: 30px;
-  padding-top: 20px;
+  gap: 15px;
 }
-.lado-der h1 {
-  font-size: 2em;
-  text-align: center;
+.dot-decor {
+  width: 12px;
+  height: 12px;
+  background-color: #b38e5d;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #b38e5d;
 }
-.input {
-  background-color: white; /* Esto es para que el fondo del input sea transparente */
-  color: black; /* Esto es para que el texto del input sea negro */
-  border: none; /* Esto quita el borde por defecto */
-  padding: 10px; /* Esto es para darle espacio al texto dentro del input */
-  border-radius: 5px; /* le redondee los bordes, si se los quieres quitar dale none o 0px w*/
-  width: 80%; /*Evita que las orillas choquen */
-  margin-bottom: 10px;
+.textos-card {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.lado-der::after {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  bottom: -100px;
+  right: -100px;
 }
 .VersionTag {
   position: fixed;
