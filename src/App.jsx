@@ -1,80 +1,61 @@
-import { useState } from 'react'
-import data from './BDD.json'
+import { useState } from 'react' //importamos el useState para el manejo de estados en el componente //creamos una Base de Datos Local para los usuarios
 import Bienvenida from './Bienvenida.jsx'
-import './App.css'
-import BienvenidaAlumno from './BienvenidaAlumno.jsx'
+import './App.css' //importamos el diseño
+import BienvenidaAlumno from './BienvenidaAlumno.jsx' // importamos las pantallas de bienvenida para cada rol
 import BienvenidaDocente from './BienvenidaDocente.jsx'
 import BienvenidaAdmin from './BienvenidaAdmin.jsx'
-
-/**
- * COMPONENTE APP
- * Qué hace: Renderiza la pantalla principal de login y gestiona la autenticación de usuarios
- * Renderiza diferentes vistas según el rol del usuario (Alumno, Docente, Admin)
- * Controla el estado de login, las credenciales y el rol seleccionado
- * 
- * Props: Ninguno (es el componente raíz)
- * Retorna: JSX con la pantalla de login o las pantallas de bienvenida según el estado
- */
 function App() {
-  // Estado: Almacena los datos del usuario autenticado (null si no hay sesión iniciada)
+  // almacena los datos del usuario autenticado (null si no hay sesión iniciada)
   const [usuarioLogueado, setUsuarioLogueado] = useState(null)
   
-  // Estado: Almacena el input del usuario ingresado en el campo de boleta
+  // almacena el input del usuario ingresado en el campo de boleta
   const [usuarioInput, setUsuarioInput] = useState("")
   
-  // Estado: Almacena el input de la contraseña ingresada
+  // almacena el input de la contraseña ingresada
   const [passsInput, setPassInput] = useState("")
   
-  // Estado: Almacena el rol seleccionado ("Alumno", "Docente" o "Administrador")
+  // almacena el rol seleccionado ("Alumno", "Docente" o "Administrador")
   const [rolSeleccionado, setRolSeleccionado] = useState("Alumno")
-
-  /**
-   * FUNCIÓN: manejarLogin
-   * Qué hace: Valida las credenciales del usuario contra la base de datos
-   * Busca en la BDD un usuario que coincida con boleta, contraseña y rol
-   * Si encuentra coincidencia, autentica al usuario; si no, muestra un error
-   * 
-   * Recibe: Nada (utiliza los estados: usuarioInput, passsInput, rolSeleccionado)
-   * Retorna: Nada (actualiza el estado usuarioLogueado o muestra una alerta)
-   */
-  const manejarLogin = () => {
-    const encontrado = data.usuarios.find(user =>
-      user.boleta === usuarioInput &&
-      user.password === passsInput &&
-      user.rol === rolSeleccionado
-    )
-    if (encontrado) {
-      setUsuarioLogueado(encontrado)
-    } else {
-      alert(`credenciales incorrectas para el rol de ${rolSeleccionado}`);
+  /* manejarLogin es una funcion que valida las credenciales del usuario con la BDD
+  busca en la BDD si algun usuario coincide  y si encuentra coinicidencia te manda a la pantalla, si no esta muestra error*/
+  const manejarLogin = async () => {
+    try { {/*esto es el manejo de errores pero cambie el metodo de manejarLogin para conectarlo al server jaja*/}
+      const respuesta = await fetch('http://localhost:3000/api/login', { /* esto es la configuracion del servidor, aqui el metodo agarra los inputs y los manda
+        directo al servidor para validar los datos*/
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          boleta: usuarioInput,
+          password: passsInput,
+          rol: rolSeleccionado
+        })
+      });
+      {/*aqui ya se reciben los datos por parte del servidor */}
+      const datos = await respuesta.json();
+      {/*si los datos  que se recibieron son verdaderos ps ya envia a la otra pantalla */}
+      if (datos.success) {
+        setUsuarioLogueado(datos.usuario);
+      } else { /* si no son verdaderos mandan el mensaje de error*/
+        alert(datos.message);
+      }
+    } catch (error) { /* en caso de tener el error pues lo agarra para que no se vaya todo a la fregada y mannda error de server */
+      console.error("Error en la conexion luego lo arreglo: ", error);
+      alert("No se pudo conectar al server");
     }
   };
-
-  /**
-   * FUNCIÓN: seleccionarRol
-   * Qué hace: Actualiza el rol seleccionado y registra la selección en consola
-   * Permite al usuario cambiar entre roles (Alumno, Docente, Administrador)
-   * 
-   * Recibe: rol (string) - El rol a seleccionar
-   * Retorna: Nada (actualiza el estado rolSeleccionado)
-   */
+  /* la funcion seleccionarRol hace que el usuario cambie de roles 
+  y registra la seleccion en la consola la debug console
+  recibe el rol y no  retorna nada nadamas actualiza el rol*/
   const seleccionarRol = (rol) => {
     setRolSeleccionado(rol)
     console.log('Rol Seleccionado:', rol)
   }
 
-  /**
-   * RENDERIZADO PRINCIPAL
-   * Qué hace: Renderiza la UI basada en el estado de autenticación
-   * Si el usuario está autenticado: muestra la pantalla de bienvenida según su rol
-   * Si no está autenticado: muestra la pantalla de login con formulario
-   * 
-   * Retorna: JSX con la pantalla de login o bienvenida
-   */
+ //este es la logica que muestra topa la pagina
   return ( 
     <> 
       {usuarioLogueado ? ( 
-        // SI EL USUARIO ESTÁ AUTENTICADO: mostrar pantalla de bienvenida según su rol
+        // si el usuario esta logueado, muestra la pantalla dependiendo de su rol
         usuarioLogueado.rol === "Alumno" ? (
           <BienvenidaAlumno usuario={usuarioLogueado} cerrar ={() => setUsuarioLogueado(null)} />
         ) : usuarioLogueado.rol === "Docente" ? (
@@ -83,7 +64,7 @@ function App() {
           <BienvenidaAdmin usuario={usuarioLogueado} cerrar ={() => setUsuarioLogueado(null)} />
         )
       ) : ( 
-        // SI NO HAY SESIÓN INICIADA: mostrar pantalla de login
+        // si no hay una sesion iniciada entonces se muestra la pantalla de login
         <div className="pantalla-login" >
           <div className="lado-izq"> 
             <p className="label-top">Acceso al sistema </p>
@@ -93,63 +74,63 @@ function App() {
             <div className="Selector de roles"></div>
             <p>Ingresar Como</p>
             
-            {/* BOTONES DE SELECCIÓN DE ROL */}
+            {/* aqui empiezan los botones de seleccion de rol */}
             <div className="botones-roles">
-              {/* Botón: Seleccionar rol Alumno */}
+              {/*aqui se seleccionan los roles como el de alumno*/}
               <button 
                 className={`role-btn ${rolSeleccionado === "Alumno" ? "active" : ""}`}
                 onClick={() => seleccionarRol("Alumno")}
               >👨‍🎓 Alumno</button>
               
-              {/* Botón: Seleccionar rol Docente */}
+              {/* aqui se selecciona el rol de docente */}
               <button 
                 className={`role-btn ${rolSeleccionado === "Docente" ? "active" : ""}`}
                 onClick={() => seleccionarRol("Docente")}
               > 🎓 Docente</button>
               
-              {/* Botón: Seleccionar rol Administrador */}
+              {/* aqui se selecciona el rol de admin */}
               <button 
                 className={`role-btn ${rolSeleccionado === "Administrador" ? "active" : ""}`}
                 onClick={() => seleccionarRol("Administrador")}
               > 🔧 Administrador</button>
             </div>
             
-            {/* FORMULARIO DE LOGIN */}
-            {/* Input: Campo de usuario (boleta) */}
+            {/* lo del formulario del login, lo que me pediste*/}
+            {/* aqui esta el input del usuario, aqui es donde se registra el numero de usuario el nombre o lo q quieras w*/}
             <div className="input-group">
               <label>Usuario</label>
               <input type="text" placeholder="Ej. 123456789" value={usuarioInput} onChange={(e) => setUsuarioInput(e.target.value)} />
             </div>
             
-            {/* Input: Campo de contraseña */}
+            {/* contraseña, aqui igual se implementa todo este show del pasguord*/}
             <div className="input-group">
               <label>Contraseña</label>
               <input type="password" placeholder="********" value={passsInput} onChange={(e) => setPassInput(e.target.value)} />
             </div>
             
-            {/* Enlace: Recuperar contraseña (no funcional) */}
+            {/* como pusiste tu texto dorado de recuperar contraseña lo puse aqui tambien péro no te manda nada */}
             <a href="#" className="olvido-pass">¿Olvidaste tu contraseña?</a> 
             
-            {/* Botón: Enviar formulario de login */}
+            {/* este boton llama a la funcion de manejarLogin y decide si lanzarte a la otra pantalla o directamente mandarte alaverga*/}
             <button className="btn-principal" onClick={manejarLogin}>Iniciar Sesión</button> 
           </div>
           
-          {/* LADO DERECHO: PANEL DECORATIVO CON INFORMACIÓN */}
+          {/* Aqui no hay nada que te interese ndms lo del menu*/}
           <div className="lado-der"> 
-            {/* Icono del menú */}
+            {/* icono del menu el span es ndms para el palito we no te preocupes por el*/}
             <div className="menu-icon">
               <span></span>
               <span></span>
               <span></span>
             </div>
             
-            {/* Contenido decorativo e información del sistema */}
+            {/* aqui esta todo lo decorativo, sistema de rendimiento y blah blah blah */}
             <div className="contenido-derecha">
               <h1 className="titulo-serif-grande">Rendimiento <br /> y Satisfacción</h1>
               <p className="descripcion">Sistema de Evaluación para el Seguimiento del Desempeño Académico y la Satisfacción Estudiantil</p>
             </div>
            
-            {/* Tarjeta de información de la institución */}
+            
             <div className="glass-card">
               <div className="dot-decor"></div>
               <p>Centro de Estudios Cientificos y Tecnologicos N.º 5</p>
@@ -159,8 +140,8 @@ function App() {
         </div>
       )}
       
-      {/* ETIQUETA DE VERSIÓN */}
-      <div className="VersionTag">v1.3.4</div>
+      {/*la etiqueta de la version, ya la actualice w jaja ya es la 1.3.4 porque lo estuve actualizando todo el dia*/}
+      <div className="VersionTag">v1.4.1</div>
     </>
   )
 
