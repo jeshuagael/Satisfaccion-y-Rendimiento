@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap");
-body { /* Body es para que todo el fondo de la pagina se vea de una manera en este caso la puse blanca */
+body { 
   margin: 0;
   padding: 0;
   font-family: 'DM Sans', sans-serif;

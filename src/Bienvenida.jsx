@@ -1,54 +1,38 @@
 import { useState } from 'react'
 import "./BienvenidaAdmin.css";
 
-/**
- * COMPONENTE BIENVENIDA
- * Qué hace: Renderiza una pantalla de bienvenida genérica con menú de navegación
- * Muestra opciones para: Encuestas, Gráficas, Docentes y Noticias
- * Permite al usuario cerrar la sesión desde cualquier pantalla
- * 
- * Props:
- *   - Cerrar: función para cerrar la sesión del usuario
- *   - usuario: objeto con los datos del usuario autenticado (contiene: nombre, boleta, rol)
- * 
- * Retorna: JSX con la pantalla de bienvenida genérica
- */
+
 function BienvenidaAdmin({ Cerrar, usuario }) {
-    // Estado: Controla si se abre/cierra la sección de Encuestas
+
     const [Encuesta, setEncuesta] = useState(false)
     
-    // Estado: Controla si se abre/cierra la sección de Gráficas
     const [Graficas, setGraficas] = useState(false)
     
-    // Estado: Controla si se abre/cierra la sección de Docentes
     const [Docentes, setDocentes] = useState(false)
-    
-    // Estado: Controla si se abre/cierra la sección de Noticias
+  
     const [Noticias, setNoticias] = useState(false)
 
     return (
         <div className="pantalla-bienvenida">
-            {/* MENÚ LATERAL IZQUIERDO */}
-            <div className="lado-izk">
-                {/* Botón: Abrir sección de Encuestas */}
+            
+            <div className="lado-izq">
+                
                 <button onClick={() => setEncuesta(true)}>Encuestas</button>
                 
-                {/* Botón: Abrir sección de Gráficas */}
+               
                 <button onClick={() => setGraficas(true)}>Graficas</button>
                 
-                {/* Botón: Abrir sección de Docentes */}
+               
                 <button onClick={() => setDocentes(true)}>Docentes</button>
                 
-                {/* Botón: Abrir sección de Noticias */}
+               
                 <button onClick={() => setNoticias(true)}>Noticias</button>
-                
-                {/* Botón: Cerrar sesión del usuario */}
+              
                 <button onClick={Cerrar}>Cerrar Sesion</button>
             </div>
 
-            {/* CONTENIDO PRINCIPAL DERECHO */}
-            <div className="lado-del">
-                {/* Saludo personalizado con el nombre del usuario */}
+            <div className="lado-der">
+              
                 <h1> Bienvenid@ {usuario.nombre} </h1>
             </div>
         </div>

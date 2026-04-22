@@ -1,0 +1,25 @@
+/* Grafica_Salones.css */
+
+.badge-porcentaje {
+    background: rgba(179, 142, 93, 0.2);
+    color: #b38e5d;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid #b38e5d;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.selector-graficas {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.contenedor-chart {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    height: 300px;
+}

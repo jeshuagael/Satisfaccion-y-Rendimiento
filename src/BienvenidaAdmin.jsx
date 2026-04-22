@@ -1,56 +1,55 @@
 import { useState } from 'react'
-import "./Bienvenida.css";
+import './App.css' // Importante: Usar el CSS global para heredar el diseño
 
-/**
- * COMPONENTE BIENVENIDAADMIN
- * Qué hace: Renderiza la pantalla de bienvenida personalizada para administradores
- * Muestra un menú de navegación con opciones: Encuestas, Gráficas, Docentes, Noticias
- * Permite cerrar la sesión del usuario autenticado
- * 
- * Props:
- *   - Cerrar: función para cerrar la sesión del usuario
- *   - usuario: objeto con los datos del usuario autenticado (contiene: nombre, boleta, rol)
- * 
- * Retorna: JSX con la pantalla de bienvenida para Administradores
- */
-function BienvenidaAdmin({ Cerrar, usuario}) {
-    // Estado: Controla si se abre/cierra la sección de Encuestas
-    const [Encuesta, setEncuesta] = useState(false)
-    
-    // Estado: Controla si se abre/cierra la sección de Gráficas
-    const [Graficas, setGraficas] = useState(false)
-    
-    // Estado: Controla si se abre/cierra la sección de Docentes
+function BienvenidaAdmin({ cerrar, usuario, irAEncuestas, irAGraficas }) {
     const [Docentes, setDocentes] = useState(false)
-    
-    // Estado: Controla si se abre/cierra la sección de Noticias
     const [Noticias, setNoticias] = useState(false)
 
     return (
-        <div className="pantalla-bienvenida-admin">
-            {/* MENÚ LATERAL IZQUIERDO */}
-            <div className="lado-izk">
-                {/* Botón: Abrir sección de Encuestas */}
-                <button onClick={() => setEncuesta(true)}>Encuestas</button>
+        <div className="pantalla-login"> {/* Esta clase activa el Flexbox del login */}
+            
+            {/* LADO IZQUIERDO: Panel de botones */}
+            <div className="lado-izq">
+                <p className="label-top">Panel Admin</p>
+                <h1 className="titulo-serif">Bienvenido, {usuario?.nombre}!</h1>
+                <div className="linea-dorada"></div>
                 
-                {/* Botón: Abrir sección de Gráficas */}
-                <button onClick={() => setGraficas(true)}>Graficas</button>
-                
-                {/* Botón: Abrir sección de Docentes */}
-                <button onClick={() => setDocentes(true)}>Docentes</button>
-                
-                {/* Botón: Abrir sección de Noticias */}
-                <button onClick={() => setNoticias(true)}>Noticias</button>
-                
-                {/* Botón: Cerrar sesión del usuario */}
-                <button onClick={Cerrar}>Cerrar Sesion</button>
+                <p className="subtitulo">Selecciona una opcion</p>
+
+                <div className="botones-menu" style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '20px' }}>
+                    <button className="btn-principal" onClick={irAEncuestas}>📝 Encuestas</button>
+                    <button className="btn-principal" onClick={irAGraficas}>📊 Gráficas</button>
+                    <button className="btn-principal" onClick={() => setDocentes(true)}>👨‍🏫 Docentes</button>
+                    <button className="btn-principal" onClick={() => setNoticias(true)}>📰 Noticias</button>
+                    
+                    {/* Botón de cerrar sesión con estilo diferente */}
+                    <button className="role-btn" onClick={cerrar} style={{ marginTop: '20px', borderColor: '#b38e5d', color: '#6C1D45' }}>
+                        Cerrar Sesión
+                    </button>
+                </div>
             </div>
 
-            {/* CONTENIDO PRINCIPAL DERECHO */}
-            <div className="lado-del">
-                {/* Saludo personalizado con el nombre del usuario */}
-                <h1> Bienvenid@ ({usuario?.nombre}) </h1>
+            {/* LADO DERECHO: El fondo guinda institucional */}
+            <div className="lado-der">
+                <div className="menu-icon">
+                    <span></span><span></span><span></span>
+                </div>
+                
+                <div className="contenido-derecha">
+                    <h1 className="titulo-serif-grande">Bienvenid@ <br /> al Panel</h1>
+                    <p className="descripcion">Sistema de Evaluación para el Seguimiento del Desempeño Académico del CECyT 5.</p>
+                </div>
+
+                <div className="glass-card">
+                    <div className="dot-decor"></div>
+                    <div className="textos-card">
+                        <p>Usuario: <strong>{usuario?.nombre}</strong></p>
+                        <p>ID: {usuario?.boleta}</p>
+                    </div>
+                </div>
             </div>
+
+            <div className="VersionTag">v1.4.1</div>
         </div>
     )
 }

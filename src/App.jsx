@@ -4,12 +4,17 @@ import './App.css' //importamos el diseño
 import BienvenidaAlumno from './BienvenidaAlumno.jsx' // importamos las pantallas de bienvenida para cada rol
 import BienvenidaDocente from './BienvenidaDocente.jsx'
 import BienvenidaAdmin from './BienvenidaAdmin.jsx'
+import Encuestas from './Encuestas.jsx'
+import Graficas from './Graficas.jsx'
 function App() {
   // almacena los datos del usuario autenticado (null si no hay sesión iniciada)
-  const [usuarioLogueado, setUsuarioLogueado] = useState(null)
-  
+  const [usuarioLogueado, setUsuarioLogueado] = useState(() => {
+    const guardado = localStorage.getItem('sesionUsuario');
+    return guardado ? JSON.parse(guardado) : null;
+  });
   // almacena el input del usuario ingresado en el campo de boleta
   const [usuarioInput, setUsuarioInput] = useState("")
+  const [vistaActual, setVistaActual] = useState("inicio");
   
   // almacena el input de la contraseña ingresada
   const [passsInput, setPassInput] = useState("")
@@ -18,9 +23,10 @@ function App() {
   const [rolSeleccionado, setRolSeleccionado] = useState("Alumno")
   /* manejarLogin es una funcion que valida las credenciales del usuario con la BDD
   busca en la BDD si algun usuario coincide  y si encuentra coinicidencia te manda a la pantalla, si no esta muestra error*/
+  
   const manejarLogin = async () => {
     try { {/*esto es el manejo de errores pero cambie el metodo de manejarLogin para conectarlo al server jaja*/}
-      const respuesta = await fetch('http://localhost:3000/api/login', { /* esto es la configuracion del servidor, aqui el metodo agarra los inputs y los manda
+      const respuesta = await fetch('http://localhost:4500/api/login', { /* esto es la configuracion del servidor, aqui el metodo agarra los inputs y los manda
         directo al servidor para validar los datos*/
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -34,6 +40,7 @@ function App() {
       const datos = await respuesta.json();
       {/*si los datos  que se recibieron son verdaderos ps ya envia a la otra pantalla */}
       if (datos.success) {
+        localStorage.setItem('sesionUsuario', JSON.stringify(datos.usuario));
         setUsuarioLogueado(datos.usuario);
       } else { /* si no son verdaderos mandan el mensaje de error*/
         alert(datos.message);
@@ -50,20 +57,55 @@ function App() {
     setRolSeleccionado(rol)
     console.log('Rol Seleccionado:', rol)
   }
+  const cerrarSesion = () => {
+    localStorage.removeItem('sesionUsuario');
+    setUsuarioLogueado(null);
+    setVistaActual("inicio");
+  };
 
  //este es la logica que muestra topa la pagina
   return ( 
     <> 
       {usuarioLogueado ? ( 
-        // si el usuario esta logueado, muestra la pantalla dependiendo de su rol
-        usuarioLogueado.rol === "Alumno" ? (
-          <BienvenidaAlumno usuario={usuarioLogueado} cerrar ={() => setUsuarioLogueado(null)} />
-        ) : usuarioLogueado.rol === "Docente" ? (
-          <BienvenidaDocente usuario={usuarioLogueado} cerrar ={() => setUsuarioLogueado(null)} />
+        /* --- LÓGICA DE NAVEGACIÓN DENTRO DE LA SESIÓN --- */
+        vistaActual === "encuestas" ? (
+          <Encuestas 
+            usuario={usuarioLogueado} 
+            volver={() => setVistaActual("inicio")} 
+            cerrar={cerrarSesion} 
+          />
+        ) : vistaActual === "graficas" ? ( // <--- 2. AGREGAR ESTA CONDICIÓN
+          <Graficas 
+            usuario={usuarioLogueado} 
+            volver={() => setVistaActual("inicio")} 
+            cerrar={cerrarSesion} 
+          />
         ) : (
-          <BienvenidaAdmin usuario={usuarioLogueado} cerrar ={() => setUsuarioLogueado(null)} />
+          /* --- MENÚS PRINCIPALES SEGÚN ROL --- */
+          usuarioLogueado.rol === "Alumno" ? (
+            <BienvenidaAlumno 
+              usuario={usuarioLogueado} 
+              cerrar={cerrarSesion} 
+              irAEncuestas={() => setVistaActual("encuestas")}
+              irAGraficas={() => setVistaActual("graficas")} 
+            />
+          ) : usuarioLogueado.rol === "Docente" ? (
+            <BienvenidaDocente
+              usuario={usuarioLogueado} 
+              cerrar={cerrarSesion} 
+              irAEncuestas={() => setVistaActual("encuestas")}
+              irAGraficas={() => setVistaActual("graficas")} // <--- 3. PASAR LA FUNCIÓN
+            />
+          ) : (
+            <BienvenidaAdmin 
+              usuario={usuarioLogueado} 
+              cerrar={cerrarSesion} 
+              irAEncuestas={() => setVistaActual("encuestas")}
+              irAGraficas={() => setVistaActual("graficas")} // <--- 3. PASAR LA FUNCIÓN
+            />
+          )
         )
-      ) : ( 
+      ) : (
         // si no hay una sesion iniciada entonces se muestra la pantalla de login
         <div className="pantalla-login" >
           <div className="lado-izq"> 
@@ -141,7 +183,7 @@ function App() {
       )}
       
       {/*la etiqueta de la version, ya la actualice w jaja ya es la 1.3.4 porque lo estuve actualizando todo el dia*/}
-      <div className="VersionTag">v1.4.1</div>
+      <div className="VersionTag">v1.7.2</div>
     </>
   )
 
