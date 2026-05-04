@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "boleta": "20230001",
+    "password": "123",
+    "rol": "Alumno",
+    "nombre": "el Chom"
+  },
+  {
+    "id": 2,
+    "boleta": "20230002",
+    "password": "123",
+    "rol": "Alumno",
+    "nombre": "el Mateo"
+  },
+  {
+    "id": 3,
+    "boleta": "profesor",
+    "password": "456",
+    "rol": "Docente",
+    "nombre": "Don Baraja"
+  },
+  {
+    "id": 4,
+    "boleta": "lic",
+    "password": "456",
+    "rol": "Docente",
+    "nombre": "Don Edahi"
+  },
+  {
+    "id": 5,
+    "boleta": "admin01",
+    "password": "789",
+    "rol": "Administrador",
+    "nombre": "Admin"
+  },
+  {
+    "id": 6,
+    "boleta": "1234",
+    "password": "123",
+    "rol": "Alumno",
+    "nombres": "MateoBapo",
+    "apellidoPaterno": "12",
+    "apellidoMaterno": "2",
+    "nombre": "MateoBapo 12 2"
+  },
+  {
+    "id": 7,
+    "boleta": "234",
+    "password": "1234",
+    "rol": "Docente",
+    "nombres": "Aczino",
+    "apellidoPaterno": "s",
+    "apellidoMaterno": "s",
+    "nombre": "Aczino s s"
+  },
+  {
+    "id": 8,
+    "boleta": "890",
+    "password": "89",
+    "rol": "Docente",
+    "nombres": "sdgf",
+    "apellidoPaterno": "sdfs",
+    "apellidoMaterno": "fsdg",
+    "nombre": "sdgf sdfs fsdg"
+  }
+]

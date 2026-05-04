@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "docenteId": 1,
+    "titulo": "Feo",
+    "descripcion": "Gato feo",
+    "estrellas": 5,
+    "autor": "Anónimo",
+    "fecha": "2026-05-03T09:36:54.709Z"
+  },
+  {
+    "id": 2,
+    "docenteId": 1,
+    "titulo": "Guapo",
+    "descripcion": "Gato Guapo",
+    "estrellas": 3,
+    "autor": "Anónimo",
+    "fecha": "2026-05-03T09:42:01.489Z"
+  },
+  {
+    "id": 3,
+    "docenteId": 1,
+    "titulo": "esta bieb feo",
+    "descripcion": "esta asqueroso jaja salu2",
+    "estrellas": 1,
+    "autor": "Anónimo",
+    "fecha": "2026-05-03T22:34:36.039Z"
+  }
+]

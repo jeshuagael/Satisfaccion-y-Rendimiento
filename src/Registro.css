@@ -1,0 +1,123 @@
+/* Solo ajustes extra si quieres que los botones de bienvenida se vean un poco distintos */
+.botones-columna .btn-principal {
+    text-align: left;
+    padding-left: 25px;
+    font-size: 1rem;
+}
+
+.botones-columna .btn-principal:hover {
+    background-color: #7d2250;
+    transform: translateX(5px); /* Efecto de desplazamiento lateral */
+}
+
+/* Corregimos el typo de 'izk' y 'del' para que usen las clases de App.css */
+
+.registro-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.registro-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 28px;
+  border-radius: 18px;
+  background: #ffffffee;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  color: inherit;
+}
+
+.registro-card h2 {
+  margin-bottom: 18px;
+  font-size: 1.7rem;
+  color: #2a2a2a;
+}
+
+.registro-card form {
+  display: grid;
+  gap: 14px;
+}
+
+.registro-card label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.registro-card input,
+.registro-card select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #cccccc;
+  font-size: 1rem;
+  background: #fdfdfd;
+  color: #1f2937;
+}
+
+.registro-card input::placeholder {
+  color: #9ca3af;
+}
+
+.registro-card .btn-principal,
+.registro-card .btn-secundario {
+  width: 100%;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.registro-card .btn-principal {
+  background: #5c2f7a;
+  color: #fff;
+}
+
+.registro-card .btn-secundario {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.registro-card .btn-principal:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+body[data-theme="dark"] .registro-container {
+  background: rgba(15, 23, 42, 0.9);
+}
+
+body[data-theme="dark"] .registro-card {
+  background: rgba(15, 23, 42, 0.92);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.5);
+}
+
+body[data-theme="dark"] .registro-card h2,
+body[data-theme="dark"] .registro-card label {
+  color: #e2e8f0;
+}
+
+body[data-theme="dark"] .registro-card input,
+body[data-theme="dark"] .registro-card select {
+  background: #0f172a;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+body[data-theme="dark"] .registro-card input::placeholder {
+  color: #94a3b8;
+}
+
+body[data-theme="dark"] .registro-card .btn-secundario {
+  background: #1e293b;
+  color: #cbd5e1;
+}
+
+body[data-theme="dark"] .registro-card .btn-principal {
+  background: #2563eb;
+}

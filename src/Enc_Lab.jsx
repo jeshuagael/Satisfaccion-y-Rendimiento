@@ -2,11 +2,10 @@ import { useState } from 'react'
 import './App.css'
 
 function FormularioEncuestaSalones({ tipo, usuario, regresar }) {
-    // Estado para guardar las respuestas (1-5) y el comentario de texto
     const [respuestas, setRespuestas] = useState({});
     const [comentarios, setComentarios] = useState("");
 
-    // Listado de preguntas sobre infraestructura del CECyT 5
+  
     const preguntas = [
         "¿El salón cuenta con suficiente iluminación para las clases?",
         "¿Las butacas se encuentran en buen estado y son suficientes?",
@@ -37,7 +36,7 @@ function FormularioEncuestaSalones({ tipo, usuario, regresar }) {
     const enviarEncuesta = async () => {
     const respondidas = Object.values(respuestas);
     
-    // Validar que se respondieron las 20 preguntas
+   
     if (respondidas.length < 20) {
         alert("Por favor, responde todas las preguntas del laboratorio.");
         return;
@@ -50,10 +49,10 @@ function FormularioEncuestaSalones({ tipo, usuario, regresar }) {
     const datosFinales = {
         boleta: usuario.boleta,
         nombre: usuario.nombre,
-        tipo: "Laboratorio", // <--- DEBE SER IGUAL AL DEL SERVER
+        tipo: "Laboratorio", 
         respuestas: respuestas,
         comentarios: comentarios,
-        satisfaccion: parseFloat(porcentajeSatisfaccion) // Lo mandamos como número
+        satisfaccion: parseFloat(porcentajeSatisfaccion) 
     };
 
     try {
@@ -67,7 +66,7 @@ function FormularioEncuestaSalones({ tipo, usuario, regresar }) {
 
         if (resultado.success) {
             alert(`¡Encuesta guardada con éxito! Satisfacción: ${porcentajeSatisfaccion}%`);
-            regresar(); // Volver al menú
+            regresar(); 
         } else {
             alert("El servidor recibió los datos pero no pudo guardarlos.");
         }
@@ -88,13 +87,11 @@ function FormularioEncuestaSalones({ tipo, usuario, regresar }) {
                 <p>Categoría: <strong>{tipo}</strong> | Alumno: <strong>{usuario.nombre}</strong></p>
             </div>
 
-            {/* Contenedor Glassmorphism */}
             <div className="glass-card" style={{ position: 'relative', width: '90%', maxWidth: '800px', margin: '90px 0', padding: '40px', display: 'block', zIndex: 1 }}>
                 
-                {/* SOLUCIÓN AL CÍRCULO: pointerEvents: none para que no estorbe los clics */}
+           
                 <div className="dot-decor" style={{ pointerEvents: 'none', zIndex: 0 }}></div>
 
-                {/* Capa de contenido arriba del diseño decorativo */}
                 <div style={{ position: 'relative', zIndex: 10 }}>
                     {preguntas.map((p, index) => (
                         <div key={index} style={{ marginBottom: '30px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '15px' }}>
@@ -128,7 +125,7 @@ function FormularioEncuestaSalones({ tipo, usuario, regresar }) {
                     />
 
                     <button className="btn-principal" onClick={enviarEncuesta} style={{ width: '100%', marginTop: '30px', backgroundColor: '#b38e5d', color: '#4a1030', fontWeight: 'bold' }}>
-                        Enviar Evaluación de Salones
+                        Enviar Evaluación de Laboratorios
                     </button>
                 </div>
             </div>

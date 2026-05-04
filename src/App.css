@@ -67,7 +67,7 @@ body {
   color: #555;
   min-width: 80px;
 }
-.input:focus {
+.input-group input:focus {
   border-color: #6C1D45;
   outline: none;
 }
@@ -76,13 +76,18 @@ body {
   gap: 10px;
   margin-bottom:25px;
 }
-.role-btn {
+.botones-roles .role-btn {
   flex: 1;
-  padding: 10px;
+}
+.role-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
   border: 1px solid #801a1a;
   border-radius: 10px;
   background: white;
-  color: #6C1D45;
+  color: #000000;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -120,8 +125,26 @@ body {
   text-decoration: none;
   margin-bottom: 20px;
 }
+.registro-pass {
+  text-align: right;
+  font-size: 0.85rem;
+  color: #DAA520;
+  margin-top: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  width: 380px;
+}
+.registro-pass:hover {
+  opacity: 0.8;
+}
+[data-theme='dark'] .registro-pass {
+  color: #87CEEB;
+}
 .lado-der {
-  background: radial-gradient(circle at top right, #801a1a, #4a1030);
+  background: linear-gradient(rgba(128, 26, 26, 0.75), rgba(74, 16, 48, 0.75)),
+              url("./assets/Cecyt 5.webp") center/cover no-repeat;
   width: 70%;
   height: 100vh;
   display: flex;
@@ -164,7 +187,6 @@ body {
   line-height: 1.6;
 }
 .glass-card {
-  position: absolute;
   bottom: 80px;
   left: 80px;
   background: rgba(255, 255, 255, 0.05);
@@ -175,6 +197,7 @@ body {
   display: flex;
   align-items: center;
   gap: 15px;
+  margin-top: 400px;
 }
 .dot-decor {
   width: 12px;
@@ -205,9 +228,113 @@ body {
   right: 20px;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
-  padding: 5px, 10px;
+  padding: 5px 10px;
   border-radius: 5px;
   font-size: 15px;
   z-index: 1000;
   pointer-events: none;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #111827;
+  font-weight: 700;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  z-index: 2000;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+}
+
+.theme-toggle-text {
+  font-size: 0.95rem;
+}
+
+body[data-theme="light"] {
+  background-color: #f8f9fa;
+  background-image: linear-gradient(#e5e7eb 1px, transparent 1px), linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+  color: #111827;
+}
+
+body[data-theme="dark"] {
+  background-color: #0f172a;
+  background-image: linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  color: #f8fafc;
+}
+
+body[data-theme="dark"] .lado-izq {
+  background: #19387a;
+  color: #e2e8f0;
+  top: 20px;
+  height: 2000px;
+}
+
+body[data-theme="dark"] .input-group {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body[data-theme="dark"] .input-group label {
+  color: #cbd5e1;
+}
+
+body[data-theme="dark"] .input-group input {
+  color: #f8fafc;
+}
+
+body[data-theme="dark"] .role-btn {
+  background: #264691;
+  color: #ffffff;
+  border-color: #334155;
+}
+
+body[data-theme="dark"] .botones-roles .role-btn.active {
+  background-color: #2563eb;
+  border-color: #2563eb;
+  color: white;
+}
+
+body[data-theme="dark"] .btn-principal {
+  background-color: #2563eb;
+  color: white;
+}
+
+body[data-theme="dark"] .btn-principal:hover {
+  background-color: #1d4ed8;
+}
+
+body[data-theme="dark"] .olvido-pass {
+  color: #93c5fd;
+}
+
+body[data-theme="dark"] .lado-der {
+  background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(17, 24, 39, 0.8)),
+              url("./assets/Cecyt 5.webp") center/cover no-repeat;
+}
+
+body[data-theme="dark"] .theme-toggle {
+  background-color: rgba(15, 23, 42, 0.95);
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.graficas-panel .lado-izq {
+  width: 460px;
+  min-width: 360px;
+  padding: 40px;
+  background: rgba(1, 217, 255, 0.08);
+  border-right: 1px solid rgba(24, 117, 247, 0.2);
+  box-shadow: 0 0 50px rgba(28, 173, 199, 0.08);
 }

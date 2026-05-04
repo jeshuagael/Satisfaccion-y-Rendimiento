@@ -5,13 +5,13 @@ import {
 } from 'recharts';
 import './Grafica_Docente.css'; 
 
-function GraficaDocentes({ usuario, regresar }) {
+function GraficaBano({ usuario, regresar }) {
     const [datos, setDatos] = useState([]);
     const [tipoGrafica, setTipoGrafica] = useState('barras');
     const [cargando, setCargando] = useState(true);
 
     useEffect(() => {
-        // Pedimos los datos específicos de docentes al server
+        // Pedimos los datos de baño al server Para todos los archivos de grafica es lo mismo
         fetch('http://localhost:4500/api/resultados/bano')
             .then(res => res.json())
             .then(res => {
@@ -47,7 +47,7 @@ function GraficaDocentes({ usuario, regresar }) {
                     <button className="role-btn" onClick={() => setTipoGrafica('pastel')}>Pastel</button>
                     <button className="role-btn" onClick={() => setTipoGrafica('lineas')}>Tendencia</button>
                 </div>
-
+                {/* grafica de contenedor*/}
                 <div className="contenedor-chart">
                     <ResponsiveContainer width="100%" height="100%">
                         {tipoGrafica === 'barras' ? (
@@ -57,8 +57,8 @@ function GraficaDocentes({ usuario, regresar }) {
                                 <Tooltip contentStyle={{ backgroundColor: '#6C1D45', border: '1px solid #b38e5d' }} />
                                 <Bar dataKey="porcentaje" fill="#b38e5d" radius={[5, 5, 0, 0]} />
                             </BarChart>
-                        ) : tipoGrafica === 'pastel' ? (
-                            <PieChart>
+                        ) : tipoGrafica === 'pastel' ? ( 
+                            <PieChart> {/* grafica pastel */}
                                 <Pie data={datos} dataKey="porcentaje" nameKey="pregunta" cx="50%" cy="50%" outerRadius={80} label>
                                     {datos.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
                                 </Pie>
@@ -97,9 +97,9 @@ function GraficaDocentes({ usuario, regresar }) {
                     ⬅ Volver al Panel
                 </button>
             </div>
-            <div className="VersionTag">v1.4.1</div>
+          
         </div>
     );
 }
 
-export default GraficaDocentes;
+export default GraficaBano;

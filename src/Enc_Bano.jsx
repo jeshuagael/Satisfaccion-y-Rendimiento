@@ -5,7 +5,7 @@ function FormularioEncuestaBano({ usuario, regresar }) {
     const tipo = "Encuesta Baño";
     const [respuestas, setRespuestas] = useState({});
     const [comentarios, setComentarios] = useState("");
-
+     // no hay mucha logica aqui, si quieres cambiar o agregar preguntas agregalas desde aqui el demas codigo es lo mismo
     const preguntas = [
         "¿Qué tan limpio consideras que está el piso del baño?",
         "¿Hay suficiente papel higiénico disponible?",
@@ -55,7 +55,7 @@ function FormularioEncuestaBano({ usuario, regresar }) {
             comentarios: comentarios,
             satisfaccion: parseFloat(porcentajeSatisfaccion)
         };
-
+        //Esto manda los resultados a la base de datos
         try {
             const respuesta = await fetch('http://localhost:4500/api/encuestas/guardar', {
                 method: 'POST',
@@ -80,7 +80,7 @@ function FormularioEncuestaBano({ usuario, regresar }) {
     return (
         <div className="lado-der" style={{ width: '100vw', minHeight: '100vh', overflowY: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             
-            {/* Cabecera */}
+            
             <div style={{ maxWidth: '800px', width: '90%', marginTop: '50px' }}>
                 <button className="role-btn" onClick={regresar} style={{ color: 'black', borderColor: 'white', cursor: 'pointer' }}>⬅ Volver al Menú</button>
                 <h1 className="titulo-serif-grande" style={{ fontSize: '3rem', marginTop: '20px' }}>{tipo}</h1>
@@ -88,7 +88,7 @@ function FormularioEncuestaBano({ usuario, regresar }) {
                 <p><strong>Estudiante:</strong> {usuario.nombre} | <strong>Boleta:</strong> {usuario.boleta}</p>
             </div>
 
-            {/* Contenedor principal con la solución al círculo */}
+            
             <div className="glass-card" style={{ 
                 position: 'relative', 
                 width: '90%', 
@@ -96,13 +96,12 @@ function FormularioEncuestaBano({ usuario, regresar }) {
                 margin: '90px 0', 
                 padding: '40px', 
                 display: 'block',
-                zIndex: 1 // Asegura que la tarjeta esté en un plano base
+                zIndex: 1 
             }}>
                 
-                {/* SOLUCIÓN AL CÍRCULO: pointerEvents none hace que el clic lo atraviese */}
+                
                 <div className="dot-decor" style={{ pointerEvents: 'none', zIndex: 0 }}></div>
 
-                {/* Contenedor de preguntas con z-index alto */}
                 <div style={{ position: 'relative', zIndex: 10 }}>
                     {preguntas.map((p, index) => (
                         <div key={index} style={{ marginBottom: '30px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '15px' }}>
@@ -147,7 +146,7 @@ function FormularioEncuestaBano({ usuario, regresar }) {
                     </div>
 
                     <button className="btn-principal" onClick={enviarEncuesta} style={{ width: '100%', marginTop: '30px', backgroundColor: '#b38e5d', fontWeight: 'bold' }}>
-                        Enviar Evaluación Finalizada
+                        Enviar Evaluación Baño
                     </button>
                 </div>
             </div>

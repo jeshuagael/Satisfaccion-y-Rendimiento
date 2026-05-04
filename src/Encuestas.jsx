@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 
-// PASO 1: Importar correctamente asignando un nombre al componente
+//Este es el menu donde se ven todas las encuestas
 import FormularioBano from './Enc_Bano.jsx' 
 import FormularioDoc from './Enc_Doc.jsx'
 import FormularioLab from './Enc_Lab.jsx'

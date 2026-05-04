@@ -1,4 +1,4 @@
-import { useState } from 'react' //importamos el useState para el manejo de estados en el componente //creamos una Base de Datos Local para los usuarios
+import React, { useState, useContext } from 'react' //importamos el useState para el manejo de estados en el componente //creamos una Base de Datos Local para los usuarios
 import Bienvenida from './Bienvenida.jsx'
 import './App.css' //importamos el diseño
 import BienvenidaAlumno from './BienvenidaAlumno.jsx' // importamos las pantallas de bienvenida para cada rol
@@ -6,6 +6,15 @@ import BienvenidaDocente from './BienvenidaDocente.jsx'
 import BienvenidaAdmin from './BienvenidaAdmin.jsx'
 import Encuestas from './Encuestas.jsx'
 import Graficas from './Graficas.jsx'
+import NoticiasAdmin from './NoticiasAdmin.jsx'
+import NoticiasUser from './NoticiasUser.jsx'
+import DocentesAdmin from './DocentesAdmin.jsx'
+import DocentesUser from './DocentesUser.jsx'
+import UsuariosAdmin from './UsuariosAdmin.jsx'
+import Registro from './Registro.jsx'
+import RespuestasAdmin from './RespuestasAdmin.jsx'
+import { ThemeContext } from './Tema.jsx'
+ // Contexto global de tema para alternar entre claro y oscuro
 function App() {
   // almacena los datos del usuario autenticado (null si no hay sesión iniciada)
   const [usuarioLogueado, setUsuarioLogueado] = useState(() => {
@@ -57,64 +66,117 @@ function App() {
     setRolSeleccionado(rol)
     console.log('Rol Seleccionado:', rol)
   }
+  /* la funcion de cerrarSesion quita al usuario de la pestaña para cuando quiera darle en regresar no pueda hacer nada que se cierre su sesion completamente*/
   const cerrarSesion = () => {
     localStorage.removeItem('sesionUsuario');
     setUsuarioLogueado(null);
     setVistaActual("inicio");
   };
 
- //este es la logica que muestra topa la pagina
+  // aqui hice el tema claro u oscuro esto es global para todas las pantallas
+  const { EsOscuro, toggleTheme } = useContext(ThemeContext);
+  // aqui tenemos unos booleanos para mandar a una pantalla dependiendo del rol
   return ( 
-    <> 
+    <>  {/* Este es el boton de los modos si oscuro o claro, saque los emiojis de PiliApp xdd busca la pagina*/}
+      <button className="theme-toggle" onClick={toggleTheme} aria-label="Cambiar tema">
+        {EsOscuro ? '🌙' : '☀️'}
+        <span className="theme-toggle-text">{EsOscuro ? 'Oscuro' : 'Claro'}</span>
+      </button>
       {usuarioLogueado ? ( 
-        /* --- LÓGICA DE NAVEGACIÓN DENTRO DE LA SESIÓN --- */
+        /* la navegacion de las pantallas  */
         vistaActual === "encuestas" ? (
           <Encuestas 
             usuario={usuarioLogueado} 
             volver={() => setVistaActual("inicio")} 
             cerrar={cerrarSesion} 
           />
-        ) : vistaActual === "graficas" ? ( // <--- 2. AGREGAR ESTA CONDICIÓN
+        ) : vistaActual === "graficas" ? (
           <Graficas 
             usuario={usuarioLogueado} 
             volver={() => setVistaActual("inicio")} 
             cerrar={cerrarSesion} 
+            irARespuestas={() => setVistaActual("respuestasAdmin")}
+          />
+        ) : vistaActual === "noticiasAdmin" ? (
+          <NoticiasAdmin
+            usuario={usuarioLogueado}
+            volver={() => setVistaActual("inicio")}
+            cerrar={cerrarSesion}
+          />
+        ) : vistaActual === "noticiasUser" ? (
+          <NoticiasUser
+            usuario={usuarioLogueado}
+            volver={() => setVistaActual("inicio")}
+            cerrar={cerrarSesion}
+          />
+        ) : vistaActual === "docentesAdmin" ? (
+          <DocentesAdmin
+            usuario={usuarioLogueado}
+            volver={() => setVistaActual("inicio")}
+            cerrar={cerrarSesion}
+          />
+        ) : vistaActual === "usuariosAdmin" ? (
+          <UsuariosAdmin
+            usuario={usuarioLogueado}
+            volver={() => setVistaActual("inicio")}
+            cerrar={cerrarSesion}
+          />
+        ) : vistaActual === "respuestasAdmin" ? (
+          <RespuestasAdmin
+            usuario={usuarioLogueado}
+            volver={() => setVistaActual("inicio")}
+            cerrar={cerrarSesion}
+          />
+        ) : vistaActual === "docentesUser" ? (
+          <DocentesUser
+            usuario={usuarioLogueado}
+            volver={() => setVistaActual("inicio")}
+            cerrar={cerrarSesion}
           />
         ) : (
-          /* --- MENÚS PRINCIPALES SEGÚN ROL --- */
+          /* Menu segun el rol */
           usuarioLogueado.rol === "Alumno" ? (
             <BienvenidaAlumno 
               usuario={usuarioLogueado} 
               cerrar={cerrarSesion} 
               irAEncuestas={() => setVistaActual("encuestas")}
-              irAGraficas={() => setVistaActual("graficas")} 
+              irAGraficas={() => setVistaActual("graficas")}
+              irADocentes={() => setVistaActual("docentesUser")}
+              irANoticias={() => setVistaActual("noticiasUser")}
             />
           ) : usuarioLogueado.rol === "Docente" ? (
             <BienvenidaDocente
               usuario={usuarioLogueado} 
               cerrar={cerrarSesion} 
               irAEncuestas={() => setVistaActual("encuestas")}
-              irAGraficas={() => setVistaActual("graficas")} // <--- 3. PASAR LA FUNCIÓN
+              irAGraficas={() => setVistaActual("graficas")} 
+              irANoticias={() => setVistaActual("noticiasUser")}
+              irADocentes={() => setVistaActual("docentesUser")}
             />
           ) : (
             <BienvenidaAdmin 
               usuario={usuarioLogueado} 
               cerrar={cerrarSesion} 
               irAEncuestas={() => setVistaActual("encuestas")}
-              irAGraficas={() => setVistaActual("graficas")} // <--- 3. PASAR LA FUNCIÓN
+              irAGraficas={() => setVistaActual("graficas")} 
+              irANoticias={() => setVistaActual("noticiasAdmin")}
+              irADocentes={() => setVistaActual("docentesAdmin")}
+              irAUsuarios={() => setVistaActual("usuariosAdmin")}
             />
           )
         )
-      ) : (
+          ) :  vistaActual === 'Registro' ? (
+            <Registro volver={() => setVistaActual("inicio")} />
+          ) : (
         // si no hay una sesion iniciada entonces se muestra la pantalla de login
         <div className="pantalla-login" >
           <div className="lado-izq"> 
-            <p className="label-top">Acceso al sistema </p>
+            <p className="label-top"> Proyecto </p>
             <h1>Inicio de Sesión</h1> 
             <div className="linea-dorada"></div>
             <p className="subtitulo">Ingresa tus credenciales institucionales para continuar </p>
             <div className="Selector de roles"></div>
-            <p>Ingresar Como</p>
+            <p>Ingresar Como: </p>
             
             {/* aqui empiezan los botones de seleccion de rol */}
             <div className="botones-roles">
@@ -150,29 +212,19 @@ function App() {
               <input type="password" placeholder="********" value={passsInput} onChange={(e) => setPassInput(e.target.value)} />
             </div>
             
-            {/* como pusiste tu texto dorado de recuperar contraseña lo puse aqui tambien péro no te manda nada */}
-            <a href="#" className="olvido-pass">¿Olvidaste tu contraseña?</a> 
-            
-            {/* este boton llama a la funcion de manejarLogin y decide si lanzarte a la otra pantalla o directamente mandarte alaverga*/}
             <button className="btn-principal" onClick={manejarLogin}>Iniciar Sesión</button> 
+            { /* El link para Registrarse*/}
+            <a href="#" className="registro-pass" onClick={() => setVistaActual('Registro')}>Registrate</a>
           </div>
           
-          {/* Aqui no hay nada que te interese ndms lo del menu*/}
           <div className="lado-der"> 
-            {/* icono del menu el span es ndms para el palito we no te preocupes por el*/}
-            <div className="menu-icon">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            
             {/* aqui esta todo lo decorativo, sistema de rendimiento y blah blah blah */}
             <div className="contenido-derecha">
               <h1 className="titulo-serif-grande">Rendimiento <br /> y Satisfacción</h1>
               <p className="descripcion">Sistema de Evaluación para el Seguimiento del Desempeño Académico y la Satisfacción Estudiantil</p>
             </div>
            
-            
+            {/* El GlassCard con informacion que querias */}
             <div className="glass-card">
               <div className="dot-decor"></div>
               <p>Centro de Estudios Cientificos y Tecnologicos N.º 5</p>
@@ -183,7 +235,7 @@ function App() {
       )}
       
       {/*la etiqueta de la version, ya la actualice w jaja ya es la 1.3.4 porque lo estuve actualizando todo el dia*/}
-      <div className="VersionTag">v1.7.2</div>
+      <div className="VersionTag">v1.3.0</div>
     </>
   )
 

@@ -1,40 +1,33 @@
-import { useState } from 'react'
-import './App.css' // Importante: Usar el CSS global para heredar el diseño
-
-function BienvenidaAdmin({ cerrar, usuario, irAEncuestas, irAGraficas }) {
-    const [Docentes, setDocentes] = useState(false)
-    const [Noticias, setNoticias] = useState(false)
-
+import './App.css' // Uso el css de App que es  el diseño global y lo que tiene los temas
+// importamos las funciones para ir a otras pestañas
+function BienvenidaAdmin({ cerrar, usuario, irAEncuestas, irAGraficas, irADocentes, irANoticias, irAUsuarios }) {
     return (
-        <div className="pantalla-login"> {/* Esta clase activa el Flexbox del login */}
+        <div className="pantalla-login"> {/* tema de la pantalla izquierda*/}
             
-            {/* LADO IZQUIERDO: Panel de botones */}
+            {/* esto es el lado izquierdo con los botones */}
             <div className="lado-izq">
                 <p className="label-top">Panel Admin</p>
-                <h1 className="titulo-serif">Bienvenido, {usuario?.nombre}!</h1>
+                <h1 className="titulo-serif">Bienvenido, {usuario?.nombre}!</h1> {/* toma del usuario su nombre*/}
                 <div className="linea-dorada"></div>
                 
                 <p className="subtitulo">Selecciona una opcion</p>
-
+                {/* Los botones para las acciones */}
                 <div className="botones-menu" style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '20px' }}>
                     <button className="btn-principal" onClick={irAEncuestas}>📝 Encuestas</button>
                     <button className="btn-principal" onClick={irAGraficas}>📊 Gráficas</button>
-                    <button className="btn-principal" onClick={() => setDocentes(true)}>👨‍🏫 Docentes</button>
-                    <button className="btn-principal" onClick={() => setNoticias(true)}>📰 Noticias</button>
+                    <button className="btn-principal" onClick={irADocentes}>👨‍🏫 Docentes</button>
+                    <button className="btn-principal" onClick={irAUsuarios}>👥 Usuarios</button>
+                    <button className="btn-principal" onClick={irANoticias}>📰 Noticias</button>
                     
-                    {/* Botón de cerrar sesión con estilo diferente */}
+                    {/* Este es el boton para cerrar la sesion*/}
                     <button className="role-btn" onClick={cerrar} style={{ marginTop: '20px', borderColor: '#b38e5d', color: '#6C1D45' }}>
                         Cerrar Sesión
                     </button>
                 </div>
             </div>
 
-            {/* LADO DERECHO: El fondo guinda institucional */}
+            {/* Lado derech con la foto qe querias */}
             <div className="lado-der">
-                <div className="menu-icon">
-                    <span></span><span></span><span></span>
-                </div>
-                
                 <div className="contenido-derecha">
                     <h1 className="titulo-serif-grande">Bienvenid@ <br /> al Panel</h1>
                     <p className="descripcion">Sistema de Evaluación para el Seguimiento del Desempeño Académico del CECyT 5.</p>
@@ -49,7 +42,7 @@ function BienvenidaAdmin({ cerrar, usuario, irAEncuestas, irAGraficas }) {
                 </div>
             </div>
 
-            <div className="VersionTag">v1.4.1</div>
+           
         </div>
     )
 }

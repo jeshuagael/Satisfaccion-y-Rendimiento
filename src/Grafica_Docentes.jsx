@@ -5,13 +5,12 @@ import {
 } from 'recharts';
 import './Grafica_Docente.css'; 
 
-function GraficaDocentes({ usuario, regresar }) {
+function GraficaDocente({ usuario, regresar }) {
     const [datos, setDatos] = useState([]);
     const [tipoGrafica, setTipoGrafica] = useState('barras');
     const [cargando, setCargando] = useState(true);
 
     useEffect(() => {
-        // Pedimos los datos específicos de docentes al server
         fetch('http://localhost:4500/api/resultados/docentes')
             .then(res => res.json())
             .then(res => {
@@ -28,7 +27,7 @@ function GraficaDocentes({ usuario, regresar }) {
             <h1 className="titulo-serif-grande" style={{ color: 'white', textAlign: 'center' }}>
                 No hay evaluaciones <br /> docentes todavía.
             </h1>
-            <button className="role-btn" onClick={regresar} style={{ marginTop: '900px', color: 'black', borderColor: 'white' }}>
+            <button className="role-btn" onClick={regresar} style={{ marginTop: '20px', color: 'white', borderColor: 'white' }}>
                 ⬅ Regresar
             </button>
         </div>
@@ -97,9 +96,9 @@ function GraficaDocentes({ usuario, regresar }) {
                     ⬅ Volver al Panel
                 </button>
             </div>
-            <div className="VersionTag">v1.4.1</div>
+         
         </div>
     );
 }
 
-export default GraficaDocentes;
+export default GraficaDocente;

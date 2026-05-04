@@ -56,7 +56,7 @@ function FormularioEncuestaDoc({ usuario, regresar }) {
         };
 
         try {
-            // Enviamos a la ruta de docentes que configuramos en el server
+       
             const respuesta = await fetch('http://localhost:4500/api/encuestas/docentes/guardar', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -88,7 +88,7 @@ function FormularioEncuestaDoc({ usuario, regresar }) {
                 <p><strong>Estudiante:</strong> {usuario.nombre} | <strong>Rol:</strong> {usuario.rol}</p>
             </div>
 
-            {/* Contenedor con solución al círculo estorboso */}
+    
             <div className="glass-card" style={{ 
                 position: 'relative', 
                 width: '90%', 
@@ -99,10 +99,10 @@ function FormularioEncuestaDoc({ usuario, regresar }) {
                 zIndex: 1
             }}>
                 
-                {/* El círculo decorativo ahora no bloquea los clics */}
+              
                 <div className="dot-decor" style={{ pointerEvents: 'none', zIndex: 0 }}></div>
 
-                {/* Preguntas en una capa superior */}
+          
                 <div style={{ position: 'relative', zIndex: 10 }}>
                     {preguntas.map((p, index) => (
                         <div key={index} style={{ marginBottom: '30px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '15px' }}>

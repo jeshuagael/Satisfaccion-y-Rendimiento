@@ -2,7 +2,6 @@ import { useState } from 'react'
 import './App.css'
 
 function FormularioEncuestaSalones({ tipo, usuario, regresar }) {
-    // Estado para guardar las respuestas y comentarios
     const [respuestas, setRespuestas] = useState({});
     const [comentarios, setComentarios] = useState("");
 
@@ -53,7 +52,7 @@ function FormularioEncuestaSalones({ tipo, usuario, regresar }) {
             tipo: `Salón: ${tipo}`,
             respuestas: respuestas,
             comentarios: comentarios,
-            satisfaccion: parseFloat(porcentajeSatisfaccion) // Lo mandamos como número para el servidor
+            satisfaccion: parseFloat(porcentajeSatisfaccion) 
         };
 
         try {
@@ -80,7 +79,7 @@ function FormularioEncuestaSalones({ tipo, usuario, regresar }) {
     return (
         <div className="lado-der" style={{ width: '100vw', minHeight: '100vh', overflowY: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             
-            {/* Cabecera */}
+
             <div style={{ maxWidth: '800px', width: '90%', marginTop: '50px' }}>
                 <button className="role-btn" onClick={regresar} style={{ color: 'black', borderColor: 'white', cursor: 'pointer' }}>⬅ Volver al Menú</button>
                 <h1 className="titulo-serif-grande" style={{ fontSize: '3rem', marginTop: '20px' }}>Encuesta Salones</h1>
@@ -89,7 +88,6 @@ function FormularioEncuestaSalones({ tipo, usuario, regresar }) {
                 <p style={{ opacity: 0.8 }}>Alumno: {usuario.nombre} | Boleta: {usuario.boleta}</p>
             </div>
 
-            {/* Contenedor Glassmorphism con corrección de círculo */}
             <div className="glass-card" style={{ 
                 position: 'relative', 
                 width: '90%', 
@@ -100,7 +98,7 @@ function FormularioEncuestaSalones({ tipo, usuario, regresar }) {
                 zIndex: 1 
             }}>
                 
-                {/* SOLUCIÓN AL CÍRCULO: pointerEvents none para que el clic lo atraviese */}
+  
                 <div className="dot-decor" style={{ pointerEvents: 'none', zIndex: 0 }}></div>
 
                 {/* Contenido de preguntas con z-index superior */}

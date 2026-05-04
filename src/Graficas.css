@@ -1,13 +1,188 @@
-/* Solo ajustes extra si quieres que los botones de bienvenida se vean un poco distintos */
-.botones-columna .btn-principal {
-    text-align: left;
-    padding-left: 25px;
-    font-size: 1rem;
+.graficas-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 24px 24px 36px;
+  background: var(--background-color, #121827);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  color: #f8fafc;
 }
 
-.botones-columna .btn-principal:hover {
-    background-color: #7d2250;
-    transform: translateX(5px); /* Efecto de desplazamiento lateral */
+.graficas-panel-full {
+  width: 100%;
+  max-width: 1280px;
+  background: rgba(15, 23, 42, 0.98);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 28px;
+  padding: 32px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
 }
 
-/* Corregimos el typo de 'izk' y 'del' para que usen las clases de App.css */
+.graficas-header {
+  max-width: 860px;
+  margin-bottom: 32px;
+}
+
+.graficas-header .label-top {
+  color: #facc15;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.graficas-header .titulo-serif {
+  font-size: 3rem;
+  line-height: 1.05;
+  color: #ffffff;
+  margin: 0;
+}
+
+.graficas-header .subtitulo {
+  margin-top: 14px;
+  font-size: 1.05rem;
+  color: #94a3b8;
+  line-height: 1.7;
+}
+
+.graficas-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.graficas-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.graficas-page .role-btn {
+  border-radius: 14px;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  font-weight: 600;
+  min-width: 120px;
+}
+
+.graficas-page .role-btn.active {
+  background: linear-gradient(135deg, rgba(255, 214, 10, 0.14), rgba(251, 146, 60, 0.24));
+  border-color: rgba(251, 146, 60, 0.5);
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(251, 146, 60, 0.18);
+}
+
+.graficas-page .role-btn:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
+
+.graficas-chart-box {
+  margin-bottom: 26px;
+}
+
+.graficas-chart-title {
+  margin: 0 0 18px;
+  color: #f8fafc;
+  font-size: 1.65rem;
+}
+
+.contenedor-chart {
+  width: 100%;
+  min-height: 380px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 20px;
+}
+
+.placeholder-chart {
+  min-height: 320px;
+  display: grid;
+  place-items: center;
+  color: #94a3b8;
+  font-size: 1rem;
+}
+
+.graficas-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: rgba(30, 41, 59, 0.98);
+}
+
+.graficas-table th,
+.graficas-table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.graficas-table th {
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.graficas-table td {
+  color: #dbeafe;
+}
+
+.graficas-table tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.graficas-table td:last-child {
+  text-align: center;
+  font-weight: 700;
+  color: #facc15;
+}
+
+.panel-actions {
+  margin-top: 24px;
+}
+
+.panel-actions .role-btn {
+  background: #b38e5d;
+  border-color: transparent;
+  color: #111827;
+}
+
+.panel-actions .role-btn:hover {
+  background: #d4af37;
+}
+
+@media (max-width: 980px) {
+  .graficas-page {
+    padding: 20px;
+  }
+
+  .graficas-panel-full {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 760px) {
+  .graficas-panel-full {
+    padding: 20px;
+  }
+
+  .graficas-header .titulo-serif {
+    font-size: 2.4rem;
+  }
+
+  .graficas-buttons {
+    justify-content: center;
+  }
+
+  .graficas-buttons .role-btn {
+    min-width: 100px;
+  }
+}

@@ -1,0 +1,337 @@
+.docentes-page {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 32px;
+  background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 24%),
+              radial-gradient(circle at bottom right, rgba(251, 146, 60, 0.12), transparent 20%),
+              rgba(15, 23, 42, 0.95);
+}
+
+.docentes-panel {
+  width: min(1180px, 100%);
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 28px;
+  padding: 30px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+}
+
+.docentes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.docentes-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.docentes-menu,
+.docente-opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.docentes-formulario label,
+.docente-formulario-resena label,
+.docentes-formulario input,
+.docentes-formulario textarea,
+.docente-formulario-resena textarea,
+.docente-formulario-resena select {
+  display: block;
+  width: 100%;
+}
+
+.docentes-formulario label,
+.docente-formulario-resena label {
+  margin-bottom: 18px;
+  color: #dbeafe;
+  font-size: 0.95rem;
+}
+
+.docentes-formulario input,
+.docente-formulario-resena input,
+.docentes-formulario textarea,
+.docente-formulario-resena textarea,
+.docente-formulario-resena select,
+.imagen-input-label input {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  padding: 14px 16px;
+  margin-top: 8px;
+  background: rgba(15, 23, 42, 0.8);
+  color: #f8fafc;
+}
+
+.imagen-input-label {
+  display: grid;
+  gap: 10px;
+}
+
+.docentes-preview,
+.docente-detalle-vacio {
+  margin-bottom: 18px;
+}
+
+.docentes-preview img,
+.docente-detalle-header img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.docentes-historial {
+  display: grid;
+  gap: 20px;
+}
+
+.docentes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 20px;
+}
+
+.docentes-lista {
+  display: grid;
+  gap: 14px;
+}
+
+.docente-card,
+.reseña-card {
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 20px;
+  padding: 18px;
+  text-align: left;
+  color: #e2e8f0;
+  cursor: pointer;
+}
+
+.docente-card.selected,
+.role-btn.active {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(139, 92, 246, 0.18));
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.docente-card:hover,
+.reseña-card:hover {
+  transform: translateY(-1px);
+  transition: transform 0.2s ease;
+}
+
+.docente-card-header,
+.docente-card-top,
+.reseña-top,
+.docente-detalle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.docente-nombre,
+.reseña-titulo {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.docente-meta,
+.docente-materias,
+.docente-count,
+.reseña-texto,
+.docente-info p,
+.docente-detalle h2,
+.docente-detalle p {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+.docente-materias,
+.docente-count,
+.reseña-estrellas {
+  font-size: 0.9rem;
+}
+
+.docente-detalle-panel {
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.docente-detalle {
+  border-radius: 22px;
+  background: rgba(15, 23, 42, 0.86);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  padding: 20px;
+}
+
+.docente-detalle-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.docente-detalle-header img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.docente-sin-foto {
+  width: 140px;
+  height: 140px;
+  border-radius: 20px;
+  background: rgba(148, 163, 184, 0.12);
+  display: grid;
+  place-items: center;
+  color: #cbd5e1;
+}
+
+.docente-opciones {
+  flex-wrap: wrap;
+}
+
+.docente-opciones .role-btn {
+  min-width: 140px;
+}
+
+.docente-info,
+.docente-resenas-lista,
+.docente-formulario-resena,
+.docente-reseñas-section {
+  margin-top: 16px;
+}
+
+.docente-formulario-resena textarea {
+  min-height: 140px;
+}
+
+.mensaje-docente {
+  margin-top: 14px;
+  color: #f8fafc;
+}
+
+.btn-borrar {
+  background: rgba(239, 68, 68, 0.14);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #8a2323;
+  padding: 10px 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.btn-borrar:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+body[data-theme="light"] .docentes-page {
+  background:
+              #bb2c2c;
+}
+
+body[data-theme="light"] .docentes-panel {
+  background: #962727;
+  border-color: rgba(239, 68, 68, 0.18);
+  box-shadow: 0 24px 70px rgba(239, 68, 68, 0.12);
+  color: #111827;
+}
+
+body[data-theme="light"] .docentes-formulario label,
+body[data-theme="light"] .docente-formulario-resena label {
+  color: #774343a6;
+}
+
+body[data-theme="light"] .docentes-formulario input,
+body[data-theme="light"] .docente-formulario-resena input,
+body[data-theme="light"] .docentes-formulario textarea,
+body[data-theme="light"] .docente-formulario-resena textarea,
+body[data-theme="light"] .docente-formulario-resena select,
+body[data-theme="light"] .imagen-input-label input {
+  background: #ffffff;
+  border-color: rgba(248, 113, 113, 0.4);
+  color: #111827;
+}
+
+body[data-theme="light"] .docente-card,
+body[data-theme="light"] .reseña-card,
+body[data-theme="light"] .docente-detalle {
+  background: #c5b0b0;
+  border-color: rgba(248, 113, 113, 0.22);
+  color: #000000;
+}
+
+body[data-theme="light"] .docente-sin-foto {
+  background: #ffffff;
+  color: #ffffff;
+}
+
+body[data-theme="light"] .docente-nombre,
+body[data-theme="light"] .reseña-titulo {
+  color: #000000;
+}
+
+body[data-theme="light"] .docente-meta,
+body[data-theme="light"] .docente-materias,
+body[data-theme="light"] .docente-count,
+body[data-theme="light"] .reseña-texto,
+body[data-theme="light"] .docente-info p,
+body[data-theme="light"] .docente-detalle h2,
+body[data-theme="light"] .docente-detalle p {
+  color: #000000;
+}
+
+body[data-theme="light"] .docente-card.selected,
+body[data-theme="light"] .role-btn.active {
+  background: linear-gradient(135deg, rgba(248, 113, 113, 0.18), rgba(239, 68, 68, 0.22));
+  border-color: rgba(248, 113, 113, 0.35);
+}
+
+body[data-theme="light"] .docente-card:hover,
+body[data-theme="light"] .reseña-card:hover {
+  box-shadow: 0 8px 30px rgba(239, 68, 68, 0.12);
+}
+
+body[data-theme="light"] .docente-detalle-header img {
+  border-color: rgba(248, 113, 113, 0.25);
+}
+
+body[data-theme="dark"] .docentes-page {
+  background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 24%),
+              radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.18), transparent 20%),
+              #020617;
+}
+
+@media (max-width: 980px) {
+  .docentes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .docentes-page {
+    padding: 20px;
+  }
+
+  .docente-detalle-header {
+    flex-direction: column;
+  }
+}
